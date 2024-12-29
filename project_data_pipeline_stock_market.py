@@ -22,22 +22,7 @@ def fetch_stock_data(ticker: str, start_date: str, end_date: str) -> pd.DataFram
 # Main script EXTRACT ONLY
 if __name__ == "__main__":
     
-    # Example parameters
-    ticker_symbol = "NVDA"  # Replace with the desired stock symbol
-    start = "2024-01-01"
-    end = "2024-12-01"
 
-    # Fetch stock data
-    print(f"Fetching stock data for {ticker_symbol} from {start} to {end}...")
-    data = fetch_stock_data(ticker_symbol, start, end)
-
-    # Save data to a CSV file (optional)
-    output_file = f"{ticker_symbol}_stock_data.csv"
-    data.to_csv(output_file, index=False)
-    print(f"Stock data saved to {output_file}")
-
-    # Display the first few rows
-    print(data.head())
    
 # Cleaning script
 
