@@ -16,6 +16,7 @@ def fetch_stock_data(ticker: str, start_date: str, end_date: str) -> pd.DataFram
     """
     stock_data = yf.download(ticker, start=start_date, end=end_date)
     stock_data.reset_index(inplace=True)  # Reset index to include 'Date' as a column
+
     return stock_data
  
  
@@ -26,7 +27,7 @@ if __name__ == "__main__":
    
 # Cleaning script
 
-def clean_data (data):
+def clean_data (stock_data):
 	""" Cleans and transforms the data extracted to make it ready for analysis.
 	
 	Params:
@@ -35,30 +36,32 @@ def clean_data (data):
 
 	# Check for Missing Values: Use Pandas to check if any columns contain null values.
 	
-	print(data.isnull().sum())  # Check for missing values
+	print(stock_data.isnull().sum())  # Check for missing values
 	
 	# Handle Missing Data: filling with the previous value:
 	
-	data.fillna(method='ffill', inplace=True)
+	stock_data.fillna(method='ffill', inplace=True)
 	
 	# Normalize column names for database compatibility (lowercase, snake_case):
 	
-	data.columns = data.columns.str.replace (" ", "_").str.lower()
+	stock_data.columns = stock_data.columns.str.replace (" ", "_").str.lower()
 	
 	# Calculating moving averages and volatility indicators to enhance the dataset:
 	
 	# Calculate Moving Averages:
 
-	data['moving_avg_50'] = data['Close'].rolling(window=50).mean()
-	data['moving_avg_200'] = data['Close'].rolling(window=200).mean()
+	stock_data['moving_avg_50'] = stock_data['close'].rolling(window=50).mean()
+	stock_data['moving_avg_200'] = stock_data['close'].rolling(window=200).mean()
 	
 	# Daily Returns:
 
-	data['daily_return'] = data['Close'].pct_change()
+	stock_data['daily_return'] = stock_data['close'].pct_change()
 	
 	# Volatility:
 
-	data['volatility'] = data['Close'].rolling(window=30).std()
+	stock_data['volatility'] = stock_data['close'].rolling(window=30).std()
+
+ stock_data = data
 	
 	return data
 	
