@@ -61,7 +61,7 @@ def clean_data (stock_data):
 
 	stock_data['volatility'] = stock_data['close'].rolling(window=30).std()
 
- stock_data = data
+    stock_data = data
 	
 	return data
 	
