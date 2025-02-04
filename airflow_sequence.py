@@ -4,15 +4,15 @@ from datetime import datetime
 from sqlalchemy import create_engine
 
 
-def extract_data():
+def extract_data(fetch_data):
 
     pass
 
-def transform_data():
+def transform_data(clean_data):
 
     pass
 
-def load_data():
+def load_data(database_connection):
     # Load to database
     pass
 
